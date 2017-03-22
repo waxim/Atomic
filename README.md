@@ -1,3 +1,4 @@
+[![StyleCI](https://styleci.io/repos/85839959/shield?branch=master)](https://styleci.io/repos/85839959) [![Build Status](https://travis-ci.org/waxim/Atomic.svg?branch=master)](https://travis-ci.org/waxim/Atomic)
 # Atomic
 
 Atomic is a PHP schedule library, events can be build and scheduled. You may use Atomic simply to schedule your events, or you can attach an adapter and use our bin provided to run your jobs based on a cron schedule.
