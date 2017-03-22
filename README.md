@@ -73,7 +73,7 @@ namespace Custom\Schedule;
 
 class EveryWednesday implements \Atomic\Schedule\ScheduleInterface
 {
-    public function __construct(DateTime $time)
+    public function __construct(DateTime $time = null)
     {
         return true;
     }
@@ -93,7 +93,7 @@ class EveryWednesday implements \Atomic\Schedule\ScheduleInterface
         return new DateTime("Wednesday");
     }
 
-    public function isNow(DateTime $time)
+    public function isNow(DateTime $time = null)
     {
         return date("D") == "Wed";
     }
