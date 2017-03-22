@@ -6,7 +6,6 @@ use DateTime;
 
 interface ScheduleInterface
 {
-
     /**
      * We must have a constructor that receives
      * a DateTime object.
@@ -20,21 +19,21 @@ interface ScheduleInterface
     public function __construct(DateTime $time);
 
     /**
-     * Returns the name of the schedule
+     * Returns the name of the schedule.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Returns DateTime object of next run
+     * Returns DateTime object of next run.
      *
      * @return DateTime $time
      */
     public function getNextRun();
 
     /**
-     * Returns DateTime object of the first run
+     * Returns DateTime object of the first run.
      *
      * @return DateTime $time
      */
@@ -48,6 +47,7 @@ interface ScheduleInterface
      * to simulate events.
      *
      * @param null|DateTime $time
+     *
      * @return bool
      */
     public function isNow(DateTime $time);

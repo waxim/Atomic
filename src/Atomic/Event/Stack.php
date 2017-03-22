@@ -2,15 +2,15 @@
 
 namespace Atomic\Event;
 
-use DateTime;
 use Atomic\Event;
+use DateTime;
 
 class Stack
 {
     /**
-     * Our events stack
+     * Our events stack.
      *
-     * @var Array
+     * @var array
      */
     private $events = [];
 
@@ -27,7 +27,8 @@ class Stack
     /**
      * Will get the next event.
      *
-     * @param  DateTime $now
+     * @param DateTime $now
+     *
      * @return mixed
      */
     public function trigger(DateTime $now = null)
@@ -37,13 +38,15 @@ class Stack
         }
 
         $event = $this->getNextEvent($now);
+
         return $event instanceof Event ? $event->fire() : null;
     }
 
     /**
-     * Will collect the next event
+     * Will collect the next event.
      *
-     * @param  DateTime $now
+     * @param DateTime $now
+     *
      * @return Event
      */
     public function getNextEvent(DateTime $now)
@@ -51,6 +54,7 @@ class Stack
         foreach ($this->events as $index => $event) {
             if ($event->isDue($now)) {
                 unset($index);
+
                 return $event;
             }
         }
@@ -59,7 +63,7 @@ class Stack
     }
 
     /**
-     * Will return the count of our stack
+     * Will return the count of our stack.
      *
      * @return int
      */
@@ -69,7 +73,7 @@ class Stack
     }
 
     /**
-     * Get top (0) event off stack
+     * Get top (0) event off stack.
      *
      * @return Event
      */
