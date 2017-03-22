@@ -1,0 +1,13 @@
+{
+    "name": "alancole/atomic",
+    "description": "A php eventing/scheduling library.",
+    "type": "composer",
+    "autoload": {
+        "psr-4": {
+            "Atomic\\": "src/Atomic"
+        }
+    },
+    "require": {
+        "g4/cron": "^0.1.2"
+    }
+}
