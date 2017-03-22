@@ -19,7 +19,7 @@ if ($event->isDue()) {
 ```
 
 ## Stacks
-If you can register all your events no a stack and have the stack fire any events as they are due.
+If you like you can register all your events no a stack and have the stack fire any events as they are due.
 
 ```php
 $stack = new Atomic\Event\Stack([$event, $event2, $event3]);
@@ -32,7 +32,7 @@ if ($evnt) {
 }
 ```
 
-If you dont need to care about extra event data besides its return value you can just ask the stack to trigger, if it finds an event it will run it, if not it will return false.
+If you dont need to care about extra event data besides its return value you can just ask the stack to trigger the events for you, if it finds an event it will run it, if not it will return false.
 
 ```php
 $return = $stack->trigger();

@@ -2,7 +2,7 @@
 
 namespace Atomic\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Atomic\Event\Mapper;
 
 class MapperTest extends TestCase
