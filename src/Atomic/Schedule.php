@@ -2,12 +2,11 @@
 
 namespace Atomic;
 
-use DateTime;
 use DateInterval;
+use DateTime;
 
 class Schedule
 {
-
     /**
      * Hold first time.
      *
@@ -16,7 +15,7 @@ class Schedule
     protected $time;
 
     /**
-     * Holds our interval
+     * Holds our interval.
      *
      * @var DateInterval
      */
@@ -26,6 +25,7 @@ class Schedule
      * When does this event run?
      *
      * @param DateTime $time
+     *
      * @return void
      */
     public function __construct(DateTime $time)
@@ -35,7 +35,7 @@ class Schedule
     }
 
     /**
-     * Get our name
+     * Get our name.
      *
      * @return string
      */
@@ -45,18 +45,19 @@ class Schedule
     }
 
     /**
-     * Return a DateTime of next due event
+     * Return a DateTime of next due event.
      *
      * @return DateTime
      */
     public function getNextRun()
     {
         $date = $this->time;
+
         return $date->add($this->getDateInterval());
     }
 
     /**
-     * Return a DateTime of first event
+     * Return a DateTime of first event.
      *
      * @return DateTime
      */
@@ -66,7 +67,7 @@ class Schedule
     }
 
     /**
-     * Return our DateInterval
+     * Return our DateInterval.
      *
      * @return DateInterval
      */
@@ -78,12 +79,13 @@ class Schedule
     /**
      * A bool check for if we're due now.
      *
-     * @return boolean
+     * @return bool
      */
     public function isNow(DateTime $time = null)
     {
         $first = $time ? $time : $this->getFirstRun();
         $next = $this->getNextRun();
+
         return $first->format($this->compare_format) == $next->format($this->compare_format);
     }
 }

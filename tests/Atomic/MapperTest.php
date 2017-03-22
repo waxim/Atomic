@@ -2,34 +2,37 @@
 
 namespace Atomic\Tests;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use Atomic\Event\Mapper;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class MapperTest extends TestCase
 {
-
     public $map = [
-        'name' => 'name',
-        'callback' => 'task',
-        'schedule' => 'schedule',
-        'first_run' => 'first_run'
+        'name'      => 'name',
+        'callback'  => 'task',
+        'schedule'  => 'schedule',
+        'first_run' => 'first_run',
     ];
 
     public function getTestEvents()
     {
         return [
             [
-                'name' => 'my-event',
+                'name'     => 'my-event',
                 'schedule' => 'daily',
-                'task' => function() { return "test"; },
-                'first_run' => '12-12-2012'
+                'task'     => function () {
+                    return 'test';
+                },
+                'first_run' => '12-12-2012',
             ],
             [
-                'name' => 'my-event-2',
+                'name'     => 'my-event-2',
                 'schedule' => 'daily',
-                'task' => function() { return "test 2"; },
-                'first_run' => '12-12-2012'
-            ]
+                'task'     => function () {
+                    return 'test 2';
+                },
+                'first_run' => '12-12-2012',
+            ],
         ];
     }
 
@@ -48,7 +51,7 @@ class MapperTest extends TestCase
 
         $event = $stack->getTopOfStack();
 
-        $this->assertSame($event->fire(), "test");
+        $this->assertSame($event->fire(), 'test');
     }
 
     /**
@@ -68,10 +71,10 @@ class MapperTest extends TestCase
     public function testWillThrowNotCallable()
     {
         $event = [
-            'name' => 'broken-event',
-            'task' => null,
-            'schedule' => 'daily',
-            'first_run' => '12-12-2012'
+            'name'      => 'broken-event',
+            'task'      => null,
+            'schedule'  => 'daily',
+            'first_run' => '12-12-2012',
         ];
 
         $mapper = new Mapper([$event], $this->map);
@@ -87,9 +90,11 @@ class MapperTest extends TestCase
     {
         $event = [
             'name' => 'broken-event',
-            'task' => function() { return "test"; },
-            'schedule' => 'every-wednesday',
-            'first_run' => '12-12-2012'
+            'task' => function () {
+                return 'test';
+            },
+            'schedule'  => 'every-wednesday',
+            'first_run' => '12-12-2012',
         ];
 
         $mapper = new Mapper([$event], $this->map);

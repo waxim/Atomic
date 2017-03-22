@@ -2,23 +2,22 @@
 
 namespace Atomic\Event;
 
-use Atomic\Exceptions\MissingMapFields;
-use Atomic\Exceptions\CallbackCantBeCalled;
-use Atomic\Exceptions\ScheduleNotFound;
-use Atomic\Event\Stack;
-use Atomic\Schedule as Schedule;
 use Atomic\Event;
+use Atomic\Exceptions\CallbackCantBeCalled;
+use Atomic\Exceptions\MissingMapFields;
+use Atomic\Exceptions\ScheduleNotFound;
+use Atomic\Schedule as Schedule;
 use DateTime;
 
 class Mapper
 {
     /**
-     * Our field name constants
+     * Our field name constants.
      */
-    const NAME_KEY = "name";
-    const CALLBACK_KEY = "callback";
-    const SCHEDULE_KEY = "schedule";
-    const FIRSTRUN_KEY = "first_run";
+    const NAME_KEY = 'name';
+    const CALLBACK_KEY = 'callback';
+    const SCHEDULE_KEY = 'schedule';
+    const FIRSTRUN_KEY = 'first_run';
 
     /**
      * Hold our original data.
@@ -28,21 +27,21 @@ class Mapper
     private $data;
 
     /**
-     * Hold all our Event objects
+     * Hold all our Event objects.
      *
      * @var array
      */
     private $events = [];
 
     /**
-     * Hold field maps
+     * Hold field maps.
      *
      * @var array
      */
     private $map;
 
     /**
-     * Hold our stack
+     * Hold our stack.
      *
      * @var array
      */
@@ -61,18 +60,18 @@ class Mapper
      * @var array
      */
     private $schedule_map = [
-        'minute' => Minute::class,
-        'hourly' => Hourly::class,
-        'daily' => Schedule\Daily::class,
-        'weekly' => Weekly::class,
+        'minute'  => Minute::class,
+        'hourly'  => Hourly::class,
+        'daily'   => Schedule\Daily::class,
+        'weekly'  => Weekly::class,
         'monthly' => Monthly::class,
-        'yearly' => Yearly::class
+        'yearly'  => Yearly::class,
     ];
 
     /**
      * Build our stack and return it.
      *
-     * @param array  $data
+     * @param array $data
      * @param array $field_map
      *
      * @throws MissingMapFields
@@ -85,18 +84,18 @@ class Mapper
     {
         $fields = $field_map ? $field_map : $this->getRequired();
         if ((array_keys($fields) != $this->getRequired())) {
-            throw new MissingMapFields;
+            throw new MissingMapFields();
         }
 
         $this->map = $field_map;
 
         foreach ($data as $event) {
             if (!is_callable($event[$this->getFieldFromMap(self::CALLBACK_KEY)])) {
-                throw new CallbackCantBeCalled;
+                throw new CallbackCantBeCalled();
             }
 
             if (!in_array($event[$this->getFieldFromMap(self::SCHEDULE_KEY)], array_keys($this->schedule_map))) {
-                throw new ScheduleNotFound;
+                throw new ScheduleNotFound();
             }
 
             $evnt = $this->buildNewEvent($event);
@@ -110,6 +109,7 @@ class Mapper
      * Take an array and make our event.
      *
      * @param $array
+     *
      * @return Event
      */
     private function buildNewEvent(array $event)
@@ -127,7 +127,7 @@ class Mapper
     }
 
     /**
-     * Return our require array
+     * Return our require array.
      *
      * @return array
      */
@@ -137,20 +137,22 @@ class Mapper
     }
 
     /**
-     * Get our schedule class
+     * Get our schedule class.
      *
      * @return callable
      */
     public function getSchedule($class_key, $first_run)
     {
         $class = $this->schedule_map[$class_key];
+
         return new $class(new DateTime($first_run));
     }
 
     /**
-     * Get our field key from our map
+     * Get our field key from our map.
      *
      * @param string $field
+     *
      * @return string
      */
     public function getFieldFromMap($field)
@@ -159,7 +161,7 @@ class Mapper
     }
 
     /**
-     * Return our stack
+     * Return our stack.
      *
      * @return Stack
      */

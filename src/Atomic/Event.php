@@ -14,14 +14,14 @@ class Event
     private $name;
 
     /**
-     * Hold the callback function
+     * Hold the callback function.
      *
      * @var callable
      */
     private $callback;
 
     /**
-     * Hold the start time of our event
+     * Hold the start time of our event.
      *
      * @var DateTime
      */
@@ -37,10 +37,10 @@ class Event
     /**
      * Build a new event.
      *
-     * @param string     $name
-     * @param callable   $callback
-     * @param optional|DateTime   $time
-     * @param optionsal|Schedule   $schedule
+     * @param string             $name
+     * @param callable           $callback
+     * @param optional|DateTime  $time
+     * @param optionsal|Schedule $schedule
      *
      * @return void
      */
@@ -49,8 +49,6 @@ class Event
         $this->name = $name;
         $this->callback = $callback;
         $this->schedule = $schedule;
-
-        return;
     }
 
     /**
@@ -86,8 +84,9 @@ class Event
     /**
      * Will ask schedule if we're due to run.
      *
-     * @param  null|DateTime $time
-     * @return boolean
+     * @param null|DateTime $time
+     *
+     * @return bool
      */
     public function isDue(DateTime $time = null)
     {
