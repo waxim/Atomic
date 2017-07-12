@@ -40,7 +40,7 @@ class MapperTest extends TestCase
     {
         $mapper = new Mapper($this->getTestEvents(), $this->map);
         $stack = $mapper->getStack();
-
+        $this->assertTrue(false);
         $this->assertSame($stack->count(), 2);
     }
 
